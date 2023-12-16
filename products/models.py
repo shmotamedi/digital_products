@@ -4,7 +4,7 @@ class Category(models.Model):
     parent=models.ForeignKey('self',blank=True,null=True,on_delete=models.CASCADE)
     title=models.CharField(max_length=50)
     description=models.TextField(blank=True)
-    avator=models.ImageField(blank=True,upload_to='Categories')
+    avator=models.ImageField(blank=True,upload_to='Categories/')
     is_enable=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add=True)
     updated_time=models.DateTimeField(auto_now=True)
@@ -16,8 +16,9 @@ class Category(models.Model):
 class Product(models.Model):
     title=models.CharField(max_length=50)
     description=models.TextField(blank=True)
-    avator=models.ImageField(blank=True,upload_to='Categories')
+    avator=models.ImageField(blank=True,upload_to='Products/')
     is_enable=models.BooleanField(default=True)
+    categories = models.ManyToManyField('Category', blank=True)
     created_time=models.DateTimeField(auto_now_add=True)
     updated_time=models.DateTimeField(auto_now=True)
 
@@ -26,9 +27,10 @@ class Product(models.Model):
         verbose_name='Product'
         verbose_name_plural='Products'
 class File(models.Model):
+    product=models.ForeignKey('Product',on_delete=models.CASCADE)
     title=models.CharField(max_length=50)
-    description=models.TextField(blank=True)
-    avator=models.ImageField(blank=True,upload_to='Categories')
+    file=models.FileField(upload_to='files/%Y/%m/%d')
+    avatar=models.ImageField(blank=True,upload_to='Products')
     is_enable=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add=True)
     updated_time=models.DateTimeField(auto_now=True)

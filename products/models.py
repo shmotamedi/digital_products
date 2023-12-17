@@ -13,6 +13,9 @@ class Category(models.Model):
         db_table='Categories'
         verbose_name='Category'
         verbose_name_plural='Categories'
+
+    def __str__(self):
+        return self.title
 class Product(models.Model):
     title=models.CharField(max_length=50)
     description=models.TextField(blank=True)

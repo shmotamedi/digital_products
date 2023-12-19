@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Category(models.Model):
     parent=models.ForeignKey('self',blank=True,null=True,on_delete=models.CASCADE)
     title=models.CharField(max_length=50)
@@ -33,7 +34,7 @@ class File(models.Model):
     product=models.ForeignKey('Product',on_delete=models.CASCADE)
     title=models.CharField(max_length=50)
     file=models.FileField(upload_to='files/%Y/%m/%d')
-    avatar=models.ImageField(blank=True,upload_to='Products/')
+    avatar=models.ImageField(blank=True,upload_to='Files/')
     is_enable=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add=True)
     updated_time=models.DateTimeField(auto_now=True)
